@@ -32,116 +32,166 @@
 
 ## 📖 About
 
-**Exporter** is a production‑grade, interactive command‑line utility for moving and copying files and folders across Windows, macOS, and Linux. It bridges the gap between the speed of the terminal and the visual convenience of a GUI.
+**Exporter** is a production‑grade, interactive command‑line utility for moving and copying files and folders across Windows, macOS, and Linux[cite: 5]. It bridges the gap between the speed of the terminal and the visual convenience of a GUI[cite: 5].
 
-Unlike standard `cp` or `copy` commands, Exporter actively protects your data with a **non‑destructive Undo system**, visual progress bars, and graceful handling of massive file transfers.
+Unlike standard `cp` or `copy` commands, Exporter actively protects your data with a **non‑destructive Undo system**, visual progress bars, and graceful handling of massive file transfers[cite: 5].
 
 ---
 
 ## ✨ Killer Features
 
-- 🔄 **Smart Undo System** – Accidentally overwrite a file? Exporter backs up overwritten files automatically and can restore them instantly if you hit Undo.
-- 🖱️ **Drag & Drop Ready** – Robust path parsing handles dragging multiple files from Windows File Explorer or macOS Finder directly into the terminal – spaces and quotes are handled flawlessly.
-- 📊 **Visual Progress Bars** – Track large file and folder transfers with accurate, byte‑based progress indicators.
-- 🛡️ **Failsafe Operations** – Safely handle interruptions. Hit `Ctrl+C` halfway through a 50 GB transfer? Exporter automatically cleans up the corrupted partial file.
-- 🔗 **Symlink Preservation** – Intelligently detects and preserves symbolic links rather than duplicating the underlying files.
-- 🧩 **Zero Hard Dependencies** – Runs entirely on Python’s standard library out of the box (with optional enhanced trash support).
+- 🔄 **Smart Undo System** – Accidentally overwrite a file? Exporter backs up overwritten files automatically and can restore them instantly if you hit Undo[cite: 5].
+- 🖱️ **Drag & Drop Ready** – Robust path parsing handles dragging multiple files from Windows File Explorer or macOS Finder directly into the terminal – spaces and quotes are handled flawlessly[cite: 5].
+- 📊 **Visual Progress Bars** – Track large file and folder transfers with accurate, byte‑based progress indicators[cite: 5].
+- 🛡️ **Failsafe Operations** – Safely handle interruptions. Hit `Ctrl+C` halfway through a large transfer? Exporter automatically cleans up the corrupted partial file[cite: 4, 5].
+- 🔗 **Symlink Preservation** – Intelligently detects and preserves symbolic links rather than duplicating the underlying files[cite: 5].
+- 🧩 **Zero Hard Dependencies** – Runs entirely on Python’s standard library out of the box (with optional enhanced trash support)[cite: 4, 5].
 
 ---
-
 ## 💻 Installation
 
-Clone the repository and run the script directly. No complex setup is required.
+You can now install Exporter locally as a system-wide command-line utility.
+
+1. **Clone the repository:**
 
 ```bash
-git clone https://github.com/SS-Sauron/Exporter.git
-cd Exporter
+   git clone [https://github.com/SS-Sauron/Exporter.git](https://github.com/SS-Sauron/Exporter.git)
+   cd Exporter
 ```
-Optional but highly recommended:
-Install send2trash to allow Exporter’s Undo feature to safely route deleted files to your operating system’s Recycle Bin / Trash instead of permanently deleting them.
-```bash
 
-pip install send2trash
-```
+2. **Install the package:**
+Choose one of the following installation methods depending on your workflow:
+
+* **Standard Installation:**
+
+```bash
+     pip install .
+     ```
+* **Recommended Installation (With Safe Undo / Recycle Bin Support):**
+This installs the optional `send2trash` dependency so that undone files are sent to your OS trash bin instead of being permanently erased[cite: 2, 3].
+```bash
+     pip install .[trash]
+     ```
+* **Development Mode:**
+If you plan to modify the source code and want changes to reflect instantly:
+```bash
+     pip install -e .[trash]
+     ```
+
 ---
-🚀 Quick Start
 
-Once installed, launch the interactive shell with:
+## 🚀 Quick Start
+
+Once installed via `setup.py`, you can launch the application from **any directory** in your terminal simply by typing:
+
 ```bash
+exporter
 
-python exporter.py
 ```
-You’ll see a clean menu:
-```text
 
+You’ll immediately be greeted by the interactive dashboard:
+
+```text
 ==================================================
-📂 TARGET: C:\Users\YourName\Desktop
+📂 TARGET: /home/user/Desktop
    [1] Copy files/folders (any number, drag‑and‑drop or list)
    [2] Settings
    [3] Undo last copy
    [0] Exit
 Your choice: 
 
-# Press 1, then drag & drop files/folders from your file manager directly into the terminal. Press Enter – Exporter does the rest. Made a mistake? Press 3 to instantly roll back the entire batch.
 ```
+
+> 💡 **Pro-Tip:** Press `1`, then drag & drop files/folders from your native file manager directly into the terminal window. Press `Enter` to process. Made an unexpected mistake? Type `3` to instantly roll back the entire batch!
+> 
+> 
+
 ---
-🛠️ Usage
-The Interactive Shell
+
+## 🛠️ Usage
+
+### The Interactive Shell
 
 Instead of memorizing complex command‑line flags, Exporter guides you through a persistent terminal UI.
 
-Workflow example:
+1. Press `1` to start a copy operation.
 
-    1.Press 1 to start a copy operation.
 
-    2.Drag and drop 5 different files/folders from your file manager into the terminal.
+2. Drag and drop any number of different files/folders into the terminal.
 
-    3.Press Enter. Exporter calculates sizes, shows a progress bar, handles conflicts safely, and logs the transaction.
 
-    4.Made a mistake? Press 3 to instantly roll back the entire batch.
+3. Press `Enter`. Exporter calculates sizes, renders an active progress bar, manages conflicts safely, and logs the transaction.
 
-Logging
 
-All copy operations are logged to ~/.exporter_log.txt (in your home directory). You can review this file at any time.
+
+### Logging
+
+All copy transactions and runtime errors are quietly tracked for your review at:
+
+* `~/.exporter_log.txt` *(located in your user home directory)*
+
+
 ---
-⚙️ Configuration
 
-Press 2 from the main menu to change settings:
+## ⚙️ Configuration
 
-    Target directory – where copied files/folders will be placed (defaults to your Desktop).
+Press `2` from the main menu to tweak active session rules:
 
-    Auto‑replace – if OFF (default), Exporter asks before overwriting existing files.
+* **Target directory:** Define exactly where your files should land (defaults to your Desktop).
 
-    Recycle bin undo – if ON, Undo moves newly copied items to the trash (requires send2trash).
 
-    Settings are remembered for the current session only – relaunching the script resets to defaults.
+* **Auto‑replace:** Toggle whether Exporter prompts you safely before overwriting existing destination elements.
+
+
+* **Recycle bin undo:** Toggle whether the undo routine permanently deletes files or routes them safely to the system trash.
+
+
+
 ---
-🛠️ Tech Stack
 
-    Language: Python 3.8+
+## 🛠️ Tech Stack
 
-    Libraries: Standard Library only (os, shutil, pathlib, shlex, dataclasses) – no external dependencies required.
+* **Language:** Python 3.8+
 
-    Optional enhancement: send2trash for recycle bin integration.
 
-    Supported OS: Windows, Linux, macOS
+* **Core Engine:** Pure Standard Python Library (`os`, `shutil`, `pathlib`, `shlex`, `dataclasses`).
+
+
+* **Optional Enhancements:** `send2trash` for native OS Recycle Bin/Trash integration.
+
+
+* **Supported Environments:** Linux, Windows, macOS.
+
+
+
 ---
-🤝 Contributing
 
-Contributions, issues, and feature requests are welcome!
+## 🤝 Contributing
 
-    Fork the repo.
+Contributions, issues, and feature requests are always welcome!
 
-    Create your feature branch (git checkout -b feature/amazing-feature).
+1. Fork the repo.
+2. Create your feature branch (`git checkout -b feature/amazing-feature`).
 
-    Commit your changes (git commit -m 'Add some amazing feature').
 
-    Push to the branch (git push origin feature/amazing-feature).
+3. Commit your changes (`git commit -m 'Add some amazing feature'`).
 
-    Open a Pull Request.
 
-Please read our CONTRIBUTING.md for code style and guidelines.
+4. Push to the branch (`git push origin feature/amazing-feature`).
+
+
+5. Open a Pull Request.
+
+
+
+Please read our [CONTRIBUTING.md](https://www.google.com/search?q=CONTRIBUTING.md) for structural code styles and explicit debugging guidelines.
+
 ---
-📜 License
 
-Distributed under the MIT License. See the LICENSE file for details.
+## 📜 License
+
+Distributed under the MIT License. See the [LICENSE](https://www.google.com/search?q=LICENSE) file for more information.
+
+```
+
+```
