@@ -108,7 +108,10 @@ def parse_paths_from_line(line: str) -> List[Path]:
         return []
     paths = []
     for t in tokens:
-        p = Path(t.strip())
+        t = t.strip()
+        if len(t) >= 2 and ((t[0] == "'" and t[-1] == "'") or (t[0] == '"' and t[-1] == '"')):
+            t = t[1:-1]
+        p = Path(t)
         if p.exists():
             paths.append(p)
         else:
