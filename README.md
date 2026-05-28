@@ -1,21 +1,16 @@
-<!-- README.md - Copy and paste this entire block into your README.md file -->
-
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=150&section=header&text=Exporter&fontSize=90&fontAlignY=35&desc=A%20modern,%20reliable%20file%20transfer%20utility&descAlignY=51&descSize=20"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=150&section=header&text=Exporter&fontSize=90&fontAlignY=35&desc=A%20Safe,%20Interactive%20File%20Transfer%20Utility&descAlignY=51&descSize=20"/>
 </p>
-
-# 🚀 Exporter
 
 <div align="center">
 
-![Python Version](https://img.shields.io/badge/python-3.6+-blue.svg)
+![Python Version](https://img.shields.io/badge/python-3.8+-blue.svg)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Status](https://img.shields.io/badge/status-active--development-brightgreen)
-![GitHub last commit](https://img.shields.io/github/last-commit/SS-Sauron/Exporter)
-![GitHub code size](https://img.shields.io/github/languages/code-size/SS-Sauron/Exporter)
+![Standard Library](https://img.shields.io/badge/dependencies-Standard_Library_First-orange)
 
-**Fast, cross-platform file copying made simple.**
+**Fast, cross-platform file copying with robust safeguards and drag-and-drop support.**
 
 </div>
 
@@ -23,78 +18,95 @@
 
 ## 📖 About
 
-Exporter is a lightweight, dependency‑free Python utility for moving and copying files across Windows, macOS, and Linux. Built for developers and power users who need reliable file operations without the bloat of a full file manager.
+**Exporter** is a production-grade, interactive command-line utility for moving and copying files/folders across Windows, macOS, and Linux. Built for developers and power users, it bridges the gap between the speed of the terminal and the visual convenience of a GUI. 
+
+Unlike standard `cp` or `copy` commands, Exporter actively protects your data with a **non-destructive Undo system**, visual progress bars, and graceful handling of massive file transfers.
 
 ---
 
-## ✨ Features
+## ✨ Killer Features
 
-- ⚡ **Blazing fast** – uses optimised system calls
-- 🖥️ **Cross‑platform** – works on Windows, Linux, macOS
-- 🛡️ **Robust error handling** – clear feedback for permissions, disk space, etc.
-- 🧩 **No external dependencies** – only Python’s standard library
-- 📦 **Simple CLI** – intuitive arguments and help text
-
----
-
-## 🛠️ Tech Stack
-
-- **Language:** Python 3.6+
-- **Libraries:** `os`, `shutil`, `pathlib`, `argparse`
-- **Supported OS:** Windows, Linux, macOS
+- 🔄 **Smart Undo System:** Accidentally overwrite a file? Exporter actively backs up overwritten files and can restore them instantly if you hit Undo.
+- 🖱️ **Drag & Drop Ready:** Robust path parsing natively handles dragging multiple files from Windows File Explorer or macOS Finder directly into the terminal—spaces and quotes are handled flawlessly.
+- 📊 **Visual Progress Bars:** Track massive file and folder transfers with accurate, byte-based progress indicators.
+- 🛡️ **Failsafe Operations:** Safely handle interruptions. If you hit `Ctrl+C` halfway through a 50GB transfer, Exporter automatically cleans up the corrupted partial file.
+- 🔗 **Symlink Preservation:** Intelligently detects and preserves symbolic links rather than duplicating underlying files.
+- 🧩 **Zero Hard Dependencies:** Runs entirely on Python's standard library out of the box (with optional enhanced trash support).
 
 ---
 
 ## 💻 Installation
 
-```bash
-git clone https://github.com/SS-Sauron/Exporter.git
-cd Exporter
+Clone the repository and run the script directly. No complex setup is required.
 
-# No extra installation required – just Python.
+```bash
+git clone [https://github.com/SS-Sauron/Exporter.git](https://github.com/SS-Sauron/Exporter.git)
+cd Exporter
+```
+
+(Optional but Highly Recommended): Install send2trash to allow Exporter's Undo feature to safely route deleted files to your OS Recycle Bin/Trash instead of permanently deleting them.
+
+```Bash
+pip install send2trash
 ```
 
 🚀 Usage
-bash
+
+Simply run the script to launch the interactive Exporter shell:
+```Bash
+
+python exporter.py
 ```
-# Copy a single file
-python export.py --source "document.pdf" --destination "./backup/"
+The Interactive Shell
 
-# Copy and rename
-python export.py --source "config.ini" --destination "config_backup.ini"
+Instead of memorizing complex command-line flags, Exporter guides you through a clean, persistent terminal UI:
+```Plaintext
 
-# Copy multiple files
-python export.py --source file1.txt file2.txt --destination "./archive/"
-
-# Show help
-python export.py --help
+==================================================
+📂 TARGET: C:\Users\YourName\Desktop
+   [1] Copy files/folders (any number, drag‑and‑drop or list)
+   [2] Settings
+   [3] Undo last copy
+   [0] Exit
+Your choice: 
 ```
+---
+Workflow Example:
 
-Example output:
-text
-```
-Exporting file 'data.csv'...
-✅ Success! Copied to '/backups/data.csv'
-```
+    Press 1 to initiate a copy.
 
+    Drag and drop 5 different files/folders directly from your file manager into the terminal.
+
+    Press Enter. Exporter calculates the sizes, shows a progress bar, handles conflicts safely, and logs the transaction!
+
+    Made a mistake? Press 3 to instantly roll back the entire batch.
+---
+
+🛠️ Tech Stack
+
+    Language: Python 3.8+
+
+    Architecture: Standard Library (os, shutil, pathlib, shlex, dataclasses)
+
+    Supported OS: Windows, Linux, macOS
 ---
 
 🤝 Contributing
 
-Contributions are welcome!
+Contributions, issues, and feature requests are welcome!
 
     Fork the repo
 
-    Create a branch (git checkout -b feature/amazing)
+    Create your feature branch (git checkout -b feature/amazing-feature)
 
-    Commit changes (git commit -m 'Add amazing feature')
+    Commit your changes (git commit -m 'Add some amazing feature')
 
-    Push to branch (git push origin feature/amazing)
+    Push to the branch (git push origin feature/amazing-feature)
 
     Open a Pull Request
-
 ---
 
 📜 License
 
 Distributed under the MIT License. See LICENSE for details.
+
