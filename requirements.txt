@@ -1,0 +1,3 @@
+# Exporter dependencies
+# send2trash is optional but recommended for safe undo
+send2trash
